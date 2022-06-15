@@ -310,7 +310,7 @@ const drawElement = (roughCanvas, context, element) => {
     case 'pencil':
       const stroke = getSvgPathFromStroke(
         getStroke(element.points, {
-          size: 8,
+          size: 4,
           thinning: 0.8,
           smoothing: 0.1,
           streamline: 0.8,
@@ -541,7 +541,7 @@ function App() {
 
   return (
     <div>
-      <div style={{ position: 'fixed' }}>
+      <div style={{ position: 'fixed', top: '200px' }}>
         <input
           type="radio"
           id="selection"
