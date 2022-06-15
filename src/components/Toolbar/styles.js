@@ -1,22 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  position: fixed;
-
-  margin: 8px; /* Will not center vertically and won't work in IE6/7. */
-  left: 0;
-  right: 0;
-
   display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  > div {
-    background: #f4f3ee;
-
-    border-radius: 4px;
-    display: flex;
-  }
 `;
 
 export const ToolButton = styled.button`

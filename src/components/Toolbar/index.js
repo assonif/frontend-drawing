@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import FloatingContainer from '../FloatingContainer';
 
 import options from './options';
 
@@ -7,8 +8,8 @@ import { Container, ToolButton } from './styles';
 
 function Toolbar({ handleChangeTool, tool }) {
   return (
-    <Container>
-      <div>
+    <FloatingContainer position="fixed" positioning={{ left: 0, right: 0 }}>
+      <Container>
         {options.map((item) => (
           <ToolButton
             key={item.index}
@@ -20,28 +21,8 @@ function Toolbar({ handleChangeTool, tool }) {
             <span>{item.index}</span>
           </ToolButton>
         ))}
-
-        {/* <ToolButton onClick={handleChangeTool} name="line">
-          <TbLine />
-          <span>2</span>
-        </ToolButton>
-
-        <ToolButton onClick={handleChangeTool} name="rectangle">
-          <TbRectangle />
-          <span>3</span>
-        </ToolButton>
-
-        <ToolButton onClick={handleChangeTool} name="rectangle">
-          <TbPencil />
-          <span>4</span>
-        </ToolButton>
-
-        <ToolButton onClick={handleChangeTool} name="rectangle">
-          <TbTypography />
-          <span>5</span>
-        </ToolButton> */}
-      </div>
-    </Container>
+      </Container>
+    </FloatingContainer>
   );
 }
 
