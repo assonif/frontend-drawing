@@ -1,17 +1,18 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { CustomButton } from '../CustomButton/styles';
 import FloatingContainer from '../FloatingContainer';
 
 import options from './options';
 
-import { Container, ToolButton } from './styles';
+import { Container } from './styles';
 
 function Toolbar({ handleChangeTool, tool }) {
   return (
-    <FloatingContainer position="fixed" positioning={{ left: 0, right: 0 }}>
+    <FloatingContainer position="fixed" positioning={{ left: 400, right: 400 }}>
       <Container>
         {options.map((item) => (
-          <ToolButton
+          <CustomButton
             key={item.index}
             isSelected={tool === item.name}
             onClick={handleChangeTool}
@@ -19,7 +20,7 @@ function Toolbar({ handleChangeTool, tool }) {
           >
             <item.icon />
             <span>{item.index}</span>
-          </ToolButton>
+          </CustomButton>
         ))}
       </Container>
     </FloatingContainer>
