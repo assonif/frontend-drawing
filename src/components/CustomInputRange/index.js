@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
-import 'react-input-range/lib/css/index.css';
 import { Container } from './styles';
 
 function CustomInputRange({ initialValue }) {
