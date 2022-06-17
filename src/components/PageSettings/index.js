@@ -1,5 +1,7 @@
 import React from 'react';
+import { TbCircle, TbTable } from 'react-icons/tb';
 import ColorPicker from '../ColorPicker';
+import { CustomButton } from '../CustomButton/styles';
 import CustomInputRange from '../CustomInputRange';
 
 import FloatingContainer from '../FloatingContainer';
@@ -14,6 +16,14 @@ function PageSettings() {
         </SettingsSection>
         <SettingsSection title="Background">
           <ColorPicker />
+        </SettingsSection>
+        <SettingsSection title="Type">
+          <CustomButton isSelected type="rectangle">
+            <TbTable />
+          </CustomButton>
+          <CustomButton type="rectangle">
+            <TbCircle />
+          </CustomButton>
         </SettingsSection>
       </div>
     </FloatingContainer>

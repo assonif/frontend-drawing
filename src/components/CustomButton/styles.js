@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 export const CustomButton = styled.button`
   position: relative;
   display: flex;
 
   border: 0;
-  padding: 6px;
+  padding: ${(props) => (props.type === 'square' ? '6px' : '2px 8px')};
   margin: 4px;
 
   border-radius: 4px;
@@ -27,3 +28,12 @@ export const CustomButton = styled.button`
     right: 2px;
   }
 `;
+
+CustomButton.propTypes = {
+  type: PropTypes.oneOf(['square', 'rectangle']),
+  isSelected: PropTypes.bool.isRequired,
+};
+
+CustomButton.defaultProps = {
+  type: 'square',
+};
