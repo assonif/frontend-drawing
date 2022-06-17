@@ -1,4 +1,5 @@
 import React from 'react';
+import ColorPicker from '../ColorPicker';
 import CustomInputRange from '../CustomInputRange';
 
 import FloatingContainer from '../FloatingContainer';
@@ -11,14 +12,8 @@ function PageSettings() {
         <SettingsSection title="Opacity">
           <CustomInputRange initialValue={0.5} />
         </SettingsSection>
-        <SettingsSection title="Opacity">
-          <CustomInputRange initialValue={0.5} />
-        </SettingsSection>
-        <SettingsSection title="Opacity">
-          <CustomInputRange initialValue={0.5} />
-        </SettingsSection>
-        <SettingsSection title="Opacity">
-          <CustomInputRange initialValue={0.5} />
+        <SettingsSection title="Background">
+          <ColorPicker />
         </SettingsSection>
       </div>
     </FloatingContainer>

@@ -368,6 +368,10 @@ function App() {
   }, [undo, redo]);
 
   useEffect(() => {
+    console.log(elements);
+  }, [elements]);
+
+  useEffect(() => {
     const textArea = textAreaRef.current;
     if (action === 'writing') {
       textArea.focus();

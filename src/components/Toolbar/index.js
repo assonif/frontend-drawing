@@ -9,7 +9,10 @@ import { Container } from './styles';
 
 function Toolbar({ handleChangeTool, tool }) {
   return (
-    <FloatingContainer position="fixed" positioning={{ left: 400, right: 400 }}>
+    <FloatingContainer
+      position="fixed"
+      positioning={{ left: '50%', right: '50%' }}
+    >
       <Container>
         {options.map((item) => (
           <CustomButton
