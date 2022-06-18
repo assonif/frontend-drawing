@@ -1,4 +1,4 @@
-import { CHANGE_BG_COLOR, CHANGE_TOOL, CHANGE_DRAW_COLOR } from './actionsType';
+import { CHANGE_BG_COLOR, CHANGE_TOOL, CHANGE_DRAW_OPTIONS } from './actionsType';
 
 export function changeTool(payload) {
   return {
@@ -14,9 +14,9 @@ export function changeBgColor(payload) {
   };
 }
 
-export function changeDrawColor(payload) {
+export function changeDrawOptions(payload) {
   return {
-    type: CHANGE_DRAW_COLOR,
+    type: CHANGE_DRAW_OPTIONS,
     payload,
   };
 }

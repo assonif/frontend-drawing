@@ -143,15 +143,15 @@ import { CanvaConatainer } from './styles';
 
 const generator = rough.generator();
 
-const createElement = (id, x1, y1, x2, y2, type, stroke) => {
+const createElement = (id, x1, y1, x2, y2, type, stroke, strokeWidth) => {
   switch (type) {
     case 'line':
     case 'rectangle':
       const roughElement =
         type === 'line'
-          ? generator.line(x1, y1, x2, y2, { stroke })
+          ? generator.line(x1, y1, x2, y2, { stroke, strokeWidth })
           : generator.rectangle(x1, y1, x2 - x1, y2 - y1, {
-            stroke,
+            stroke, strokeWidth
           });
       return { id, x1, y1, x2, y2, type, roughElement };
     case 'pencil':
@@ -385,7 +385,7 @@ function App() {
     switch (type) {
       case 'line':
       case 'rectangle':
-        elementsCopy[id] = createElement(id, x1, y1, x2, y2, type, drawOptions.color);
+        elementsCopy[id] = createElement(id, x1, y1, x2, y2, type, drawOptions.color, drawOptions.strokeWidth);
         break;
       case 'pencil':
         elementsCopy[id].points = [...elementsCopy[id].points, { x: x2, y: y2 }];
@@ -397,7 +397,7 @@ function App() {
           .measureText(options.text).width;
         const textHeight = 24;
         elementsCopy[id] = {
-          ...createElement(id, x1, y1, x1 + textWidth, y1 + textHeight, type, drawOptions.color),
+          ...createElement(id, x1, y1, x1 + textWidth, y1 + textHeight, type, drawOptions.color, drawOptions.strokeWidth),
           text: options.text,
         };
         break;
@@ -442,6 +442,7 @@ function App() {
         clientY,
         tool,
         drawOptions.color,
+        drawOptions.strokeWidth
       );
       setElements((prevState) => [...prevState, element]);
       setSelectedElement(element);

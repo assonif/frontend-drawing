@@ -1,10 +1,11 @@
-import { CHANGE_BG_COLOR, CHANGE_DRAW_COLOR, CHANGE_TOOL } from './actionsType';
+import { CHANGE_BG_COLOR, CHANGE_DRAW_OPTIONS, CHANGE_TOOL } from './actionsType';
 
 export const initialState = {
   tool: 'line',
   bgColor: '#fff',
   drawOptions: {
     color: '#000',
+    strokeWidth: 1,
   },
 };
 
@@ -24,10 +25,10 @@ export const toolReducer = (state, { type, payload }) => {
       };
     }
 
-    case CHANGE_DRAW_COLOR: {
+    case CHANGE_DRAW_OPTIONS: {
       return {
         ...state,
-        drawOptions: { color: payload },
+        drawOptions: { ...state.drawOptions, ...payload },
       };
     }
 
