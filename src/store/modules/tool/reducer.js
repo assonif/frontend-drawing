@@ -1,7 +1,8 @@
-import { CHANGE_TOOL } from './actionsType';
+import { CHANGE_BG_COLOR, CHANGE_TOOL } from './actionsType';
 
 export const initialState = {
   tool: 'line',
+  bgColor: '#fff',
 };
 
 export const toolReducer = (state, { type, payload }) => {
@@ -10,6 +11,13 @@ export const toolReducer = (state, { type, payload }) => {
       return {
         ...state,
         tool: payload,
+      };
+    }
+
+    case CHANGE_BG_COLOR: {
+      return {
+        ...state,
+        bgColor: payload,
       };
     }
 

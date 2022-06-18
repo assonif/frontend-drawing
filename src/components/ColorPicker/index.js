@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+/* eslint-disable react/prop-types */
+import React from 'react';
 import { TwitterPicker } from 'react-color';
 import Tippy from '@tippyjs/react';
 import { Container, InputContainer } from './styles';
 
-function ColorPicker() {
-  const [selectedColor, setSelectedColor] = useState('#ccc');
-
+function ColorPicker({ selectedColor, setSelectedColor }) {
   return (
     <Container>
       <Tippy

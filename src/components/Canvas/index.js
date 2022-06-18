@@ -145,6 +145,7 @@ import React, {
 import rough from 'roughjs/bundled/rough.esm';
 import getStroke from 'perfect-freehand';
 import { UserContext } from '../../provider';
+import { CanvaConatainer } from './styles';
 
 const generator = rough.generator();
 
@@ -346,7 +347,7 @@ function App() {
 
   const { state } = useContext(UserContext);
 
-  const { tool } = useMemo(() => state, [state]);
+  const { tool, bgColor } = useMemo(() => state, [state]);
 
   useLayoutEffect(() => {
     const canvas = document.getElementById('canvas');
@@ -377,10 +378,6 @@ function App() {
       document.removeEventListener('keydown', undoRedoFunction);
     };
   }, [undo, redo]);
-
-  useEffect(() => {
-    console.log(elements);
-  }, [elements]);
 
   useEffect(() => {
     const textArea = textAreaRef.current;
@@ -581,16 +578,17 @@ function App() {
           data-enable-grammarly="false"
         />
       ) : null}
-      <canvas
+      <CanvaConatainer
         id="canvas"
         width={window.innerWidth}
         height={window.innerHeight}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
+        bgColor={bgColor}
       >
         Canvas
-      </canvas>
+      </CanvaConatainer>
     </div>
   );
 }
