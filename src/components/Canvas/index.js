@@ -134,9 +134,17 @@
 //   tool: PropTypes.oneOf(['line', 'rectangle', 'selection']).isRequired,
 // };
 
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import rough from 'roughjs/bundled/rough.esm';
 import getStroke from 'perfect-freehand';
+import { UserContext } from '../../provider';
 
 const generator = rough.generator();
 
@@ -333,9 +341,12 @@ const adjustmentRequired = (type) => ['line', 'rectangle'].includes(type);
 function App() {
   const [elements, setElements, undo, redo] = useHistory([]);
   const [action, setAction] = useState('none');
-  const [tool, setTool] = useState('text');
   const [selectedElement, setSelectedElement] = useState(null);
   const textAreaRef = useRef();
+
+  const { state } = useContext(UserContext);
+
+  const { tool } = useMemo(() => state, [state]);
 
   useLayoutEffect(() => {
     const canvas = document.getElementById('canvas');
@@ -545,43 +556,6 @@ function App() {
 
   return (
     <div>
-      <div style={{ position: 'fixed', top: '200px' }}>
-        <input
-          type="radio"
-          id="selection"
-          checked={tool === 'selection'}
-          onChange={() => setTool('selection')}
-        />
-        <label htmlFor="selection">Selection</label>
-        <input
-          type="radio"
-          id="line"
-          checked={tool === 'line'}
-          onChange={() => setTool('line')}
-        />
-        <label htmlFor="line">Line</label>
-        <input
-          type="radio"
-          id="rectangle"
-          checked={tool === 'rectangle'}
-          onChange={() => setTool('rectangle')}
-        />
-        <label htmlFor="rectangle">Rectangle</label>
-        <input
-          type="radio"
-          id="pencil"
-          checked={tool === 'pencil'}
-          onChange={() => setTool('pencil')}
-        />
-        <label htmlFor="pencil">Pencil</label>
-        <input
-          type="radio"
-          id="text"
-          checked={tool === 'text'}
-          onChange={() => setTool('text')}
-        />
-        <label htmlFor="text">Text</label>
-      </div>
       <div style={{ position: 'fixed', bottom: 0, padding: 10 }}>
         <button onClick={undo}>Undo</button>
         <button onClick={redo}>Redo</button>
