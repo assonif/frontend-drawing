@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import Canvas from '../../components/Canvas';
-import PageSettings from '../../components/PageSettings';
+import SidebarWrapper from '../../components/SidebarWrapper';
 import Toolbar from '../../components/Toolbar';
 import { UserContext } from '../../provider';
 import { changeTool } from '../../store/modules/tool/actions';
@@ -17,7 +17,7 @@ function Home() {
 
   return (
     <Container>
-      <PageSettings />
+      <SidebarWrapper />
       <Toolbar handleChangeTool={handleChangeTool} tool={state.tool} />
       {/* <DrawingMenu handleChangeTool={handleChangeTool} /> */}
       <Canvas />

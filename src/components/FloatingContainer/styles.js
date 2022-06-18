@@ -15,5 +15,8 @@ export const Container = styled.div`
     box-shadow: 0 0 0 1px rgb(0 0 0 / 1%), 1px 1px 5px rgb(0 0 0 / 15%);
 
     border-radius: 4px;
+    padding: 6px;
+
+    width: ${(props) => props.width};
   }
 `;

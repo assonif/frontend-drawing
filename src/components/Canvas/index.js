@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-case-declarations */
 /* eslint-disable react/button-has-type */
@@ -134,14 +135,7 @@
 //   tool: PropTypes.oneOf(['line', 'rectangle', 'selection']).isRequired,
 // };
 
-import React, {
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import rough from 'roughjs/bundled/rough.esm';
 import getStroke from 'perfect-freehand';
 import { UserContext } from '../../provider';
@@ -149,14 +143,16 @@ import { CanvaConatainer } from './styles';
 
 const generator = rough.generator();
 
-const createElement = (id, x1, y1, x2, y2, type) => {
+const createElement = (id, x1, y1, x2, y2, type, stroke) => {
   switch (type) {
     case 'line':
     case 'rectangle':
       const roughElement =
         type === 'line'
-          ? generator.line(x1, y1, x2, y2)
-          : generator.rectangle(x1, y1, x2 - x1, y2 - y1);
+          ? generator.line(x1, y1, x2, y2, { stroke })
+          : generator.rectangle(x1, y1, x2 - x1, y2 - y1, {
+            stroke,
+          });
       return { id, x1, y1, x2, y2, type, roughElement };
     case 'pencil':
       return { id, type, points: [{ x: x1, y: y1 }] };
@@ -198,9 +194,7 @@ const positionWithinElement = (x, y, element) => {
       const betweenAnyPoint = element.points.some((point, index) => {
         const nextPoint = element.points[index + 1];
         if (!nextPoint) return false;
-        return (
-          onLine(point.x, point.y, nextPoint.x, nextPoint.y, x, y, 5) != null
-        );
+        return onLine(point.x, point.y, nextPoint.x, nextPoint.y, x, y, 5) != null;
       });
       return betweenAnyPoint ? 'inside' : null;
     case 'text':
@@ -274,8 +268,7 @@ const useHistory = (initialState) => {
   const [history, setHistory] = useState([initialState]);
 
   const setState = (action, overwrite = false) => {
-    const newState =
-      typeof action === 'function' ? action(history[index]) : action;
+    const newState = typeof action === 'function' ? action(history[index]) : action;
     if (overwrite) {
       const historyCopy = [...history];
       historyCopy[index] = newState;
@@ -288,8 +281,7 @@ const useHistory = (initialState) => {
   };
 
   const undo = () => index > 0 && setIndex((prevState) => prevState - 1);
-  const redo = () =>
-    index < history.length - 1 && setIndex((prevState) => prevState + 1);
+  const redo = () => index < history.length - 1 && setIndex((prevState) => prevState + 1);
 
   return [history[index], setState, undo, redo];
 };
@@ -347,7 +339,7 @@ function App() {
 
   const { state } = useContext(UserContext);
 
-  const { tool, bgColor } = useMemo(() => state, [state]);
+  const { tool, bgColor, drawOptions } = useMemo(() => state, [state]);
 
   useLayoutEffect(() => {
     const canvas = document.getElementById('canvas');
@@ -393,13 +385,10 @@ function App() {
     switch (type) {
       case 'line':
       case 'rectangle':
-        elementsCopy[id] = createElement(id, x1, y1, x2, y2, type);
+        elementsCopy[id] = createElement(id, x1, y1, x2, y2, type, drawOptions.color);
         break;
       case 'pencil':
-        elementsCopy[id].points = [
-          ...elementsCopy[id].points,
-          { x: x2, y: y2 },
-        ];
+        elementsCopy[id].points = [...elementsCopy[id].points, { x: x2, y: y2 }];
         break;
       case 'text':
         const textWidth = document
@@ -408,7 +397,7 @@ function App() {
           .measureText(options.text).width;
         const textHeight = 24;
         elementsCopy[id] = {
-          ...createElement(id, x1, y1, x1 + textWidth, y1 + textHeight, type),
+          ...createElement(id, x1, y1, x1 + textWidth, y1 + textHeight, type, drawOptions.color),
           text: options.text,
         };
         break;
@@ -452,6 +441,7 @@ function App() {
         clientX,
         clientY,
         tool,
+        drawOptions.color,
       );
       setElements((prevState) => [...prevState, element]);
       setSelectedElement(element);
@@ -465,9 +455,7 @@ function App() {
 
     if (tool === 'selection') {
       const element = getElementAtPosition(clientX, clientY, elements);
-      event.target.style.cursor = element
-        ? cursorForPosition(element.position)
-        : 'default';
+      event.target.style.cursor = element ? cursorForPosition(element.position) : 'default';
     }
 
     if (action === 'drawing') {
@@ -493,24 +481,11 @@ function App() {
         const newX1 = clientX - offsetX;
         const newY1 = clientY - offsetY;
         const options = type === 'text' ? { text: selectedElement.text } : {};
-        updateElement(
-          id,
-          newX1,
-          newY1,
-          newX1 + width,
-          newY1 + height,
-          type,
-          options,
-        );
+        updateElement(id, newX1, newY1, newX1 + width, newY1 + height, type, options);
       }
     } else if (action === 'resizing') {
       const { id, type, position, ...coordinates } = selectedElement;
-      const { x1, y1, x2, y2 } = resizedCoordinates(
-        clientX,
-        clientY,
-        position,
-        coordinates,
-      );
+      const { x1, y1, x2, y2 } = resizedCoordinates(clientX, clientY, position, coordinates);
       updateElement(id, x1, y1, x2, y2, type);
     }
   };
@@ -529,10 +504,7 @@ function App() {
 
       const index = selectedElement.id;
       const { id, type } = elements[index];
-      if (
-        (action === 'drawing' || action === 'resizing') &&
-        adjustmentRequired(type)
-      ) {
+      if ((action === 'drawing' || action === 'resizing') && adjustmentRequired(type)) {
         const { x1, y1, x2, y2 } = adjustElementCoordinates(elements[index]);
         updateElement(id, x1, y1, x2, y2, type);
       }
