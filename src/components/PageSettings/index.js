@@ -20,10 +20,7 @@ function PageSettings() {
     <FloatingContainer>
       <Container>
         <SettingsSection title="Background">
-          <ColorPicker
-            selectedColor={bgColor}
-            setSelectedColor={handleChangeBgColor}
-          />
+          <ColorPicker selectedColor={bgColor} setSelectedColor={handleChangeBgColor} />
         </SettingsSection>
       </Container>
     </FloatingContainer>
