@@ -11,7 +11,7 @@ import { changeDrawOptions } from '../../store/modules/tool/actions';
 function ToolSettings() {
   const { dispatch, state } = useContext(UserContext);
 
-  const { color: drawColor } = useMemo(() => state.drawOptions, [state]);
+  const { stroke } = useMemo(() => state.drawOptions, [state]);
 
   const handleChangeDrawOptions = (property, value) => {
     dispatch(changeDrawOptions({ [property]: value }));
@@ -20,18 +20,24 @@ function ToolSettings() {
   return (
     <FloatingContainer width="100%">
       <Container>
-        <SettingsSection title="Background">
+        <SettingsSection title="Stroke">
           <ColorPicker
-            selectedColor={drawColor}
-            setSelectedColor={(value) => handleChangeDrawOptions('color', value)}
+            selectedColor={stroke}
+            setSelectedColor={(value) => handleChangeDrawOptions('stroke', value)}
           />
         </SettingsSection>
-        <SettingsSection title="Opacity">
+        <SettingsSection title="Fill">
+          <ColorPicker
+            selectedColor={stroke}
+            setSelectedColor={(value) => handleChangeDrawOptions('stroke', value)}
+          />
+        </SettingsSection>
+        <SettingsSection title="Stroke Width">
           <CustomInputRange
             value={state.drawOptions.strokeWidth}
             handleChangeValue={(value) => handleChangeDrawOptions('strokeWidth', value)}
             min={0}
-            max={10}
+            max={3}
           />
         </SettingsSection>
       </Container>

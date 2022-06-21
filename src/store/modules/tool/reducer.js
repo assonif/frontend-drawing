@@ -4,7 +4,7 @@ export const initialState = {
   tool: 'line',
   bgColor: '#fff',
   drawOptions: {
-    color: '#000',
+    stroke: '#000',
     strokeWidth: 1,
   },
 };

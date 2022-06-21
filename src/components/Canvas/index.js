@@ -385,7 +385,7 @@ function App() {
     switch (type) {
       case 'line':
       case 'rectangle':
-        elementsCopy[id] = createElement(id, x1, y1, x2, y2, type, drawOptions.color, drawOptions.strokeWidth);
+        elementsCopy[id] = createElement(id, x1, y1, x2, y2, type, drawOptions.stroke, drawOptions.strokeWidth);
         break;
       case 'pencil':
         elementsCopy[id].points = [...elementsCopy[id].points, { x: x2, y: y2 }];
@@ -397,7 +397,7 @@ function App() {
           .measureText(options.text).width;
         const textHeight = 24;
         elementsCopy[id] = {
-          ...createElement(id, x1, y1, x1 + textWidth, y1 + textHeight, type, drawOptions.color, drawOptions.strokeWidth),
+          ...createElement(id, x1, y1, x1 + textWidth, y1 + textHeight, type, drawOptions.stroke, drawOptions.strokeWidth),
           text: options.text,
         };
         break;
@@ -412,7 +412,7 @@ function App() {
     if (action === 'writing') return;
 
     const { clientX, clientY } = event;
-    if (tool === 'selection') {
+    if (tool === 'selection' || tool === 'eraser') {
       const element = getElementAtPosition(clientX, clientY, elements);
       if (element) {
         if (element.type === 'pencil') {
@@ -441,7 +441,7 @@ function App() {
         clientX,
         clientY,
         tool,
-        drawOptions.color,
+        drawOptions.stroke,
         drawOptions.strokeWidth
       );
       setElements((prevState) => [...prevState, element]);

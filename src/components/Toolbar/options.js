@@ -1,10 +1,4 @@
-import {
-  TbHandGrab,
-  TbLine,
-  TbRectangle,
-  TbPencil,
-  TbTypography,
-} from 'react-icons/tb';
+import { TbHandGrab, TbLine, TbRectangle, TbPencil, TbTypography, TbEraser } from 'react-icons/tb';
 
 export default [
   {
@@ -31,5 +25,13 @@ export default [
     name: 'text',
     icon: TbTypography,
     index: 5,
+  },
+  {
+    isSeparator: true,
+  },
+  {
+    name: 'eraser',
+    icon: TbEraser,
+    index: 7,
   },
 ];

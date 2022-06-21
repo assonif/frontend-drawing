@@ -9,22 +9,22 @@ import { Container } from './styles';
 
 function Toolbar({ handleChangeTool, tool }) {
   return (
-    <FloatingContainer
-      position="fixed"
-      positioning={{ left: '50%', right: '50%' }}
-    >
+    <FloatingContainer position="fixed" positioning={{ left: '50%', right: '50%' }}>
       <Container>
-        {options.map((item) => (
-          <CustomButton
-            key={item.index}
-            isSelected={tool === item.name}
-            onClick={handleChangeTool}
-            name={item.name}
-          >
-            <item.icon />
-            <span>{item.index}</span>
-          </CustomButton>
-        ))}
+        {options.map(
+          (item) =>
+            !item.isSeparator && (
+              <CustomButton
+                key={item.index}
+                isSelected={tool === item.name}
+                onClick={handleChangeTool}
+                name={item.name}
+              >
+                <item.icon />
+                <span>{item.index}</span>
+              </CustomButton>
+            ),
+        )}
       </Container>
     </FloatingContainer>
   );
