@@ -1,6 +1,6 @@
 import React, { useContext, useMemo } from 'react';
-import { UserContext } from '../../provider';
-import { changeBgColor } from '../../store/modules/tool/actions';
+import { UserContext } from '../../../provider';
+import { changeBgColor } from '../../../store/modules/tool/actions';
 import ColorPicker from '../ColorPicker';
 
 import FloatingContainer from '../FloatingContainer';

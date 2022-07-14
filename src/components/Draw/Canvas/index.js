@@ -135,11 +135,11 @@
 //   tool: PropTypes.oneOf(['line', 'rectangle', 'selection']).isRequired,
 // };
 
+import getStroke from 'perfect-freehand';
 import React, { useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import rough from 'roughjs/bundled/rough.esm';
-import getStroke from 'perfect-freehand';
-import { UserContext } from '../../provider';
-import { CanvaConatainer } from './styles';
+import { UserContext } from '../../../provider';
+import { CanvasContainer, CanvasContext } from './styles';
 
 const generator = rough.generator();
 
@@ -151,8 +151,9 @@ const createElement = (id, x1, y1, x2, y2, type, stroke, strokeWidth) => {
         type === 'line'
           ? generator.line(x1, y1, x2, y2, { stroke, strokeWidth })
           : generator.rectangle(x1, y1, x2 - x1, y2 - y1, {
-            stroke, strokeWidth
-          });
+              stroke,
+              strokeWidth,
+            });
       return { id, x1, y1, x2, y2, type, roughElement };
     case 'pencil':
       return { id, type, points: [{ x: x1, y: y1 }] };
@@ -321,7 +322,7 @@ const drawElement = (roughCanvas, context, element) => {
       break;
     case 'text':
       context.textBaseline = 'top';
-      context.font = '24px sans-serif';
+      context.font = '24px Virgil';
       context.fillText(element.text, element.x1, element.y1);
       break;
     default:
@@ -385,7 +386,16 @@ function App() {
     switch (type) {
       case 'line':
       case 'rectangle':
-        elementsCopy[id] = createElement(id, x1, y1, x2, y2, type, drawOptions.stroke, drawOptions.strokeWidth);
+        elementsCopy[id] = createElement(
+          id,
+          x1,
+          y1,
+          x2,
+          y2,
+          type,
+          drawOptions.stroke,
+          drawOptions.strokeWidth,
+        );
         break;
       case 'pencil':
         elementsCopy[id].points = [...elementsCopy[id].points, { x: x2, y: y2 }];
@@ -397,7 +407,16 @@ function App() {
           .measureText(options.text).width;
         const textHeight = 24;
         elementsCopy[id] = {
-          ...createElement(id, x1, y1, x1 + textWidth, y1 + textHeight, type, drawOptions.stroke, drawOptions.strokeWidth),
+          ...createElement(
+            id,
+            x1,
+            y1,
+            x1 + textWidth,
+            y1 + textHeight,
+            type,
+            drawOptions.stroke,
+            drawOptions.strokeWidth,
+          ),
           text: options.text,
         };
         break;
@@ -442,7 +461,7 @@ function App() {
         clientY,
         tool,
         drawOptions.stroke,
-        drawOptions.strokeWidth
+        drawOptions.strokeWidth,
       );
       setElements((prevState) => [...prevState, element]);
       setSelectedElement(element);
@@ -525,7 +544,7 @@ function App() {
   };
 
   return (
-    <div>
+    <CanvasContainer>
       <div style={{ position: 'fixed', bottom: 0, padding: 10 }}>
         <button onClick={undo}>Undo</button>
         <button onClick={redo}>Redo</button>
@@ -538,7 +557,7 @@ function App() {
             position: 'fixed',
             top: selectedElement.y1 - 2,
             left: selectedElement.x1,
-            font: '24px sans-serif',
+            font: '24px Virgil',
             margin: 0,
             padding: 0,
             border: 0,
@@ -551,7 +570,7 @@ function App() {
           data-enable-grammarly="false"
         />
       ) : null}
-      <CanvaConatainer
+      <CanvasContext
         id="canvas"
         width={window.innerWidth}
         height={window.innerHeight}
@@ -561,8 +580,8 @@ function App() {
         bgColor={bgColor}
       >
         Canvas
-      </CanvaConatainer>
-    </div>
+      </CanvasContext>
+    </CanvasContainer>
   );
 }
 

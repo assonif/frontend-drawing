@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import Canvas from '../../components/Canvas';
-import SidebarWrapper from '../../components/SidebarWrapper';
-import Toolbar from '../../components/Toolbar';
+import Canvas from '../../components/Draw/Canvas';
+import SidebarWrapper from '../../components/Draw/SidebarWrapper';
+import Toolbar from '../../components/Draw/Toolbar';
 import { UserContext } from '../../provider';
 import { changeTool } from '../../store/modules/tool/actions';
 import { Container } from './styles';
@@ -20,6 +20,8 @@ function Home() {
       <SidebarWrapper />
       <Toolbar handleChangeTool={handleChangeTool} tool={state.tool} />
       {/* <DrawingMenu handleChangeTool={handleChangeTool} /> */}
+      <div style={{ height: '300vh', zIndex: 2 }}>dsdsdsds</div>
+      <div style={{ height: '300vh', zIndex: 2 }}>dsdsdsds</div>
       <Canvas />
     </Container>
   );

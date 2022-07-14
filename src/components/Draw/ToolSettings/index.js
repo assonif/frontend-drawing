@@ -1,12 +1,12 @@
 import React, { useContext, useMemo } from 'react';
+import CustomInputRange from '../CustomInputRange';
 import FloatingContainer from '../FloatingContainer';
 import SettingsSection from '../SettingsSection';
-import CustomInputRange from '../CustomInputRange';
 
-import { Container } from './styles';
+import { UserContext } from '../../../provider';
+import { changeDrawOptions } from '../../../store/modules/tool/actions';
 import ColorPicker from '../ColorPicker';
-import { UserContext } from '../../provider';
-import { changeDrawOptions } from '../../store/modules/tool/actions';
+import { Container } from './styles';
 
 function ToolSettings() {
   const { dispatch, state } = useContext(UserContext);

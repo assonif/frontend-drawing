@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
+import Tippy from '@tippyjs/react';
 import React from 'react';
 import { TwitterPicker } from 'react-color';
-import Tippy from '@tippyjs/react';
 import { Container, InputContainer } from './styles';
 
 function ColorPicker({ selectedColor, setSelectedColor }) {

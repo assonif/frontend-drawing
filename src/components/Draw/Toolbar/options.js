@@ -1,4 +1,4 @@
-import { TbHandGrab, TbLine, TbRectangle, TbPencil, TbTypography, TbEraser } from 'react-icons/tb';
+import { TbEraser, TbHandGrab, TbLine, TbPencil, TbRectangle, TbTypography } from 'react-icons/tb';
 
 export default [
   {

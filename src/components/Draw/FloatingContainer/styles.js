@@ -9,6 +9,8 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
 
+  z-index: 1;
+
   > div {
     background: #f4f3ee;
 

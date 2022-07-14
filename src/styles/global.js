@@ -8,6 +8,12 @@ export default createGlobalStyle`
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: "Virgil"; 
+  src: local("Virgil"),
+    url("./fonts/Virgil.woff2") format("woff2");
+}
+
 body {
   background: #ffffff;
   -webkit-font-smoothing: antialiased;
@@ -24,4 +30,25 @@ button {
 }
 button {
   cursor: pointer;
+}
+
+*::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+  border-radius: 10px;
+  background-color: #f4f3ee;
+}
+
+*::-webkit-scrollbar
+{
+  width: 12px;
+  background-color: #f4f3ee;
+}
+
+*::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  -webkit-box-shadow: 0 0 6px rgba(0,0,0,.5);
+  background-color: #ea526f;
+}
 `;
