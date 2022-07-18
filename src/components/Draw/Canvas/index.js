@@ -545,10 +545,10 @@ function App() {
 
   return (
     <CanvasContainer>
-      <div style={{ position: 'fixed', bottom: 0, padding: 10 }}>
+      {/* <div style={{ position: 'fixed', bottom: 0, padding: 10 }}>
         <button onClick={undo}>Undo</button>
         <button onClick={redo}>Redo</button>
-      </div>
+      </div> */}
       {action === 'writing' ? (
         <textarea
           ref={textAreaRef}

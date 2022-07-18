@@ -7497,6 +7497,11 @@ react-scripts@5.0.0:
   optionalDependencies:
     fsevents "^2.3.2"
 
+react-scroll-motion@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/react-scroll-motion/-/react-scroll-motion-0.3.0.tgz#50b473da71521e12fcc39a4a1c7eb1e4dfed2a44"
+  integrity sha512-/7VUbyu0nONmlyQsnivcAOPCdc6GnS6LFL7R3QygtBjVAmA7dD29B/jje3jNa0fLlrwycriXq/Nm9sWgX7A1Bw==
+
 react@^17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"

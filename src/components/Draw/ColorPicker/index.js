@@ -20,7 +20,7 @@ function ColorPicker({ selectedColor, setSelectedColor }) {
       >
         <InputContainer color={selectedColor}>
           <div />
-          <input type="text" value={selectedColor.toUpperCase()} />
+          <input type="text" value={selectedColor.toUpperCase()} readOnly />
         </InputContainer>
       </Tippy>
     </Container>

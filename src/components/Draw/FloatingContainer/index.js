@@ -17,15 +17,17 @@ export default FloatingContainer;
 FloatingContainer.propTypes = {
   width: PropTypes.oneOf(['auto', '100%']),
   children: PropTypes.node.isRequired,
-  position: PropTypes.string.isRequired,
+  position: PropTypes.string,
   positioning: PropTypes.shape({
-    top: PropTypes.number,
-    bottom: PropTypes.number,
-    left: PropTypes.number,
-    right: PropTypes.number,
-  }).isRequired,
+    top: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    bottom: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    left: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    right: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  }),
 };
 
 FloatingContainer.defaultProps = {
   width: 'auto',
+  position: 'relative',
+  positioning: { top: 0, left: 0, right: 0, bottom: 0 },
 };
