@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   height: 100vh;
@@ -57,7 +57,14 @@ export const HomeContainer = styled.div`
 
   position: absolute;
 
-  right: -100%;
+  ${(props) =>
+    props.left
+      ? css`
+          left: -100%;
+        `
+      : css`
+          right: -100%;
+        `}
 
   font-size: 24px;
 

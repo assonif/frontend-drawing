@@ -6,6 +6,10 @@ import { Container, HomeContainer, IconsContainer } from './styles';
 function Header() {
   return (
     <Container>
+      <HomeContainer left>
+        <span>{`You'll find bugs.`} </span>
+        <span>{`It's not completed yet 😅`}</span>
+      </HomeContainer>
       <img src="./images/profile.jpg" alt="Profile" />
       <h1>Fabio Furtado</h1>
       <h2>Frontend Engineer</h2>

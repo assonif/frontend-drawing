@@ -7,7 +7,7 @@ function Section({ text, images }) {
   return (
     <Container>
       {text.map((paragraph) => (
-        <p>{paragraph}</p>
+        <p key={Math.random()}>{paragraph}</p>
       ))}
 
       {images && images}
