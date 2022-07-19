@@ -27,6 +27,15 @@ export const CustomButton = styled.button`
     bottom: 2px;
     right: 2px;
   }
+
+  > div {
+    display: flex;
+    flex-wrap: nowrap;
+
+    font-size: 12px;
+
+    width: auto;
+  }
 `;
 
 CustomButton.propTypes = {

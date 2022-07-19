@@ -1,4 +1,4 @@
-import { CHANGE_BG_COLOR, CHANGE_DRAW_OPTIONS, CHANGE_TOOL } from './actionsType';
+import { CHANGE_BG_COLOR, CHANGE_DRAW_OPTIONS, CHANGE_EDIT_MODE, CHANGE_TOOL } from './actionsType';
 
 export const initialState = {
   tool: 'line',
@@ -7,6 +7,7 @@ export const initialState = {
     stroke: '#000',
     strokeWidth: 1,
   },
+  editMode: false,
 };
 
 export const toolReducer = (state, { type, payload }) => {
@@ -29,6 +30,13 @@ export const toolReducer = (state, { type, payload }) => {
       return {
         ...state,
         drawOptions: { ...state.drawOptions, ...payload },
+      };
+    }
+
+    case CHANGE_EDIT_MODE: {
+      return {
+        ...state,
+        editMode: payload,
       };
     }
 

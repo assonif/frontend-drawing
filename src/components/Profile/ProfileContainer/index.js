@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Animator,
   batch,
@@ -9,15 +9,18 @@ import {
   // eslint-disable-next-line prettier/prettier
   Sticky
 } from 'react-scroll-motion';
+import { UserContext } from '../../../provider';
 import Header from '../Header';
+import ImageContainer from '../ImageContainer';
 import Section from '../Section';
 import { Container } from './styles';
 
 function ProfileContainer() {
+  const { state } = useContext(UserContext);
   const FadeUp = batch(Fade(), Move(), Sticky());
 
   return (
-    <Container>
+    <Container editMode={state.editMode}>
       <ScrollContainer>
         <ScrollPage key={Math.random()}>
           <Animator animation={FadeUp}>
@@ -36,6 +39,7 @@ function ProfileContainer() {
                 `I have more than three years' experience in software development.`,
                 'Experienced Full Stack Engineer (Frontend focused) trained in React, Next, Node, HTML, CSS, SCSS, StyledComponents, Javascript, Typescript, Redux, MobX, React Native, Expo, Nest, Cypress, Jest, react-testing-library',
               ]}
+              images={<ImageContainer />}
             />
           </Animator>
         </ScrollPage>

@@ -7,7 +7,7 @@ import options from './options';
 
 import { Container } from './styles';
 
-function Toolbar({ handleChangeTool, tool }) {
+function Toolbar({ handleChangeTool, tool, handleToggleEditMode }) {
   return (
     <FloatingContainer position="fixed" positioning={{ left: '50%', right: '50%' }}>
       <Container>
@@ -25,6 +25,9 @@ function Toolbar({ handleChangeTool, tool }) {
               </CustomButton>
             ),
         )}
+        <button className="specific-button" type="button" onClick={handleToggleEditMode}>
+          Back to readonly
+        </button>
       </Container>
     </FloatingContainer>
   );
@@ -35,4 +38,5 @@ export default Toolbar;
 Toolbar.propTypes = {
   handleChangeTool: PropTypes.func.isRequired,
   tool: PropTypes.string.isRequired,
+  handleToggleEditMode: PropTypes.func.isRequired,
 };

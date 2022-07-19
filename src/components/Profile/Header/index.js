@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
-import { Container, IconsContainer } from './styles';
+import { Container, HomeContainer, IconsContainer } from './styles';
 
 function Header() {
   return (
@@ -14,6 +14,10 @@ function Header() {
         <FaLinkedin />
         <FaGithub />
       </IconsContainer>
+      <HomeContainer>
+        <img src="./images/home.svg" alt="Hometown São paulo Brazil" />
+        <span>São Paulo, Brazil</span>
+      </HomeContainer>
     </Container>
   );
 }

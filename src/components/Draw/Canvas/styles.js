@@ -6,7 +6,7 @@ export const CanvasContainer = styled.div`
   right: 0px;
   top: 0;
   bottom: 0;
-  z-index: 0;
+  z-index: ${(props) => (props.editMode ? 1 : 0)};
 `;
 
 export const CanvasContext = styled.canvas`
@@ -19,5 +19,5 @@ export const CanvasContext = styled.canvas`
   height: 100%;
   left: 0px;
   top: 0px;
-  z-index: 0;
+  z-index: ${(props) => (props.editMode ? 1 : 0)};
 `;

@@ -29,5 +29,5 @@ FloatingContainer.propTypes = {
 FloatingContainer.defaultProps = {
   width: 'auto',
   position: 'relative',
-  positioning: { top: 0, left: 0, right: 0, bottom: 0 },
+  positioning: { top: 0, left: 0, right: 0 },
 };

@@ -39,9 +39,29 @@ export const IconsContainer = styled.div`
 
   > svg {
     margin-left: 8px;
+
+    cursor: pointer;
+
+    transition: 0.2s transform ease-in-out;
   }
 
   > svg:hover {
-    transform: scale(3);
+    transform: scale(1.3);
+  }
+`;
+
+export const HomeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  position: absolute;
+
+  right: -100%;
+
+  font-size: 24px;
+
+  > img {
+    width: 150px;
   }
 `;

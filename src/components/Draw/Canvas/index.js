@@ -428,6 +428,7 @@ function App() {
   };
 
   const handleMouseDown = (event) => {
+    if(!state.editMode) return;
     if (action === 'writing') return;
 
     const { clientX, clientY } = event;
@@ -471,6 +472,7 @@ function App() {
   };
 
   const handleMouseMove = (event) => {
+    if(!state.editMode) return;
     const { clientX, clientY } = event;
 
     if (tool === 'selection') {
@@ -511,6 +513,7 @@ function App() {
   };
 
   const handleMouseUp = (event) => {
+    if(!state.editMode) return;
     const { clientX, clientY } = event;
     if (selectedElement) {
       if (
@@ -544,7 +547,7 @@ function App() {
   };
 
   return (
-    <CanvasContainer>
+    <CanvasContainer editMode={state.editMode}>
       {/* <div style={{ position: 'fixed', bottom: 0, padding: 10 }}>
         <button onClick={undo}>Undo</button>
         <button onClick={redo}>Redo</button>
@@ -578,6 +581,7 @@ function App() {
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         bgColor={bgColor}
+        editMode={state.editMode}
       >
         Canvas
       </CanvasContext>

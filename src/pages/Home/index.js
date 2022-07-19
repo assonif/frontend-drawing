@@ -2,9 +2,10 @@ import React, { useContext } from 'react';
 import Canvas from '../../components/Draw/Canvas';
 import SidebarWrapper from '../../components/Draw/SidebarWrapper';
 import Toolbar from '../../components/Draw/Toolbar';
+import TryItButton from '../../components/Draw/TryItButton';
 import ProfileContainer from '../../components/Profile/ProfileContainer';
 import { UserContext } from '../../provider';
-import { changeTool } from '../../store/modules/tool/actions';
+import { changeEditMode, changeTool } from '../../store/modules/tool/actions';
 import { Container } from './styles';
 
 function Home() {
@@ -16,10 +17,28 @@ function Home() {
     dispatch(changeTool(name));
   };
 
+  const handleToggleEditMode = () => {
+    dispatch(changeEditMode(!state.editMode));
+  };
   return (
     <Container>
-      <SidebarWrapper />
-      <Toolbar handleChangeTool={handleChangeTool} tool={state.tool} />
+      {!state.editMode && (
+        <TryItButton
+          onClick={handleToggleEditMode}
+          lowText="Did you like my draws?"
+          highText="Try it yourself!"
+        />
+      )}
+      {state.editMode && (
+        <>
+          <SidebarWrapper onClick={handleToggleEditMode} />
+          <Toolbar
+            handleChangeTool={handleChangeTool}
+            handleToggleEditMode={handleToggleEditMode}
+            tool={state.tool}
+          />
+        </>
+      )}
       {/* <DrawingMenu handleChangeTool={handleChangeTool} /> */}
 
       <Canvas />
