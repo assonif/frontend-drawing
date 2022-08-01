@@ -4,7 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 import Provider from './provider';
 
 import Router from './routes';
-
 import GlobalStyles from './styles/global';
 
 function App() {
